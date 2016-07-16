@@ -53,15 +53,41 @@ public class GetURLs
             List<Image> aux = ImageServices.getInstance().select();
             List<Image> images = new ArrayList<>();
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 12; i++)
             {
-                int index = i + ((page - 1) * 10);
+                int index = i + ((page - 1) * 12);
 
                 if (index < aux.size())
                     images.add(aux.get(index));
                 else
                     break;
             }
+
+            model.put("images", images);
+            model.put("iniciarSesion", login);
+            return new ModelAndView(model, "home.ftl");
+        }, freeMarker);
+
+        get("/home/:etiqueta", (request, response) -> {
+            HashMap<String, Object> model = new HashMap<>();
+            int page = request.queryParams("p") != null ? Integer.parseInt(request.queryParams("p")) : 1;
+            model.put("page", (page + 1));
+
+            //Change this way to a more efficient way later.
+            List<Image> aux = ImageServices.getInstance().select();
+            List<Image> images = new ArrayList<>();
+
+            for(Image a: aux)
+            {
+                for(Etiqueta e: new HashSet<>(a.getListaEtiquetas()))
+                {
+                    if(e.getEtiqueta().toLowerCase().equals(request.params("etiqueta").toLowerCase()))
+                    {
+                        images.add(a);
+                        break;
+                    }
+                }
+            };
 
             model.put("images", images);
             model.put("iniciarSesion", login);
@@ -77,12 +103,13 @@ public class GetURLs
         get("/edit", (request, response) -> {
             HashMap<String, Object> model = new HashMap<>();
             Image image = ImageServices.getInstance().selectByID(Long.parseLong(request.queryParams("id")));
-            String tags="";
-            for(Etiqueta e: new HashSet<>(image.getListaEtiquetas())){
-                tags += e.getEtiqueta() +",";
+            String tags = "";
+            for (Etiqueta e : new HashSet<>(image.getListaEtiquetas()))
+            {
+                tags += e.getEtiqueta() + ",";
             }
             model.put("image", image);
-            model.put("etiquetas", tags.substring(0,tags.length()-1));
+            model.put("etiquetas", tags.substring(0, tags.length() - 1));
             model.put("iniciarSesion", login);
             return new ModelAndView(model, "editImage.ftl"); // TODO
         }, freeMarker);
@@ -108,6 +135,47 @@ public class GetURLs
             model.put("users", UsuarioServices.getInstance().select());
             model.put("iniciarSesion", login);
             return new ModelAndView(model, "listUsers.ftl");
+        }, freeMarker);
+
+        get("/MisFotos", (request, response) -> {
+            HashMap<String, Object> model = new HashMap<>();
+            int page = request.queryParams("p") != null ? Integer.parseInt(request.queryParams("p")) : 1;
+            model.put("page", (page + 1));
+
+            //Change this way to a more efficient way later.
+            List<Image> aux = ImageServices.getInstance().select();
+            List<Image> images = new ArrayList<>();
+
+            for (int j = 0; j < aux.size(); j++)
+            {
+                Image i = aux.get(j);
+                if (!i.getUsuario().getUsername().equals(loggedInUser.getUsername()))
+                {
+                    aux.remove(j);
+                    j--;
+                }
+            }
+
+            for (int i = 0; i < 12; i++)
+            {
+                int index = i + ((page - 1) * 12);
+
+                if (index < aux.size())
+                    images.add(aux.get(index));
+                else
+                    break;
+            }
+
+            model.put("images", images);
+            model.put("iniciarSesion", login);
+            return new ModelAndView(model, "home.ftl");
+        }, freeMarker);
+
+        get("/plainImage/:id", (request, response) -> {
+            HashMap<String, Object> model = new HashMap<>();
+            Image image = ImageServices.getInstance().selectByID(Long.parseLong(request.params("id")));
+            model.put("image", image);
+            return new ModelAndView(model, "plainImage.ftl");
         }, freeMarker);
 
 

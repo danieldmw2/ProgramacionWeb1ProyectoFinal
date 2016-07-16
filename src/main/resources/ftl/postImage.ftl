@@ -32,7 +32,7 @@
 
             <hr>
 
-            <a href="/image/${image.id}"><img src="data:image/png;base64,${image.getBase()}"></a>
+            <a href="/plainImage/${image.id}"><img width="600px" height="600px" src="data:image/png;base64,${image.getBase()}"></a>
 
             <!-- Post Content -->
             <p class="lead">${descripcion}</p>
@@ -87,7 +87,7 @@
                     <div class="col-lg-6">
                         <ul class="list-inline list-tags">
                             <#list etiquetas as etiqueta>
-                                <li><button class="btn-danger"><span class="btn-xs">${etiqueta.etiqueta}</span></button></li>
+                                    <li><button name="etiqueta" value="${etiqueta.etiqueta}" onclick="document.location='/home/${etiqueta.etiqueta}'" class="btn-danger"><span class="btn-xs">${etiqueta.etiqueta}</span></button></li>
                             </#list>
                         </ul>
                     </div>

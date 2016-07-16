@@ -25,8 +25,9 @@
 
 <script language="javascript">
 
-    function copyToClipboard(text) {
-        window.prompt("Copia el texto: Ctrl+C, Enter", text);
+    function copyToClipboard(text, text2) {
+        window.prompt("Copia el texto: Ctrl+C, Enter\n\nLink de la imagen en el blog ", text);
+        window.prompt("Copia el texto: Ctrl+C, Enter\n\nLink de la imagen: ", text2);
     }
 
     var redirect = function(url) {
@@ -98,6 +99,9 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li>
                                 <a href="/zonaAdmin"><span class="glyphicon glyphicon-floppy-save"></span> Administración</a>
+                            </li>
+                            <li>
+                                <a href="/MisFotos"><span class="glyphicon glyphicon-camera"></span> Mis Fotos</a>
                             </li>
                             <li>
                                 <a href="/sign-up"><span class="glyphicon glyphicon-user"></span> ¡Regístrate!</a>

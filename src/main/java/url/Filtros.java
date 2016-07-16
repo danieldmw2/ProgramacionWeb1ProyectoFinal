@@ -34,6 +34,12 @@ public class Filtros
                 response.redirect("/home");
         });
 
+        before("/MisFotos", (request, response) -> {
+            Usuario usuario = request.session(true).attribute("usuario");
+            if (usuario != null)
+                response.redirect("/home");
+        });
+
         before("/login", (request, response) -> {
             Usuario usuario = UsuarioServices.getInstance().selectByID(request.queryParams("username"));
             if (usuario == null)
