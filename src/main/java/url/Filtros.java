@@ -36,7 +36,7 @@ public class Filtros
 
         before("/MisFotos", (request, response) -> {
             Usuario usuario = request.session(true).attribute("usuario");
-            if (usuario != null)
+            if (usuario == null)
                 response.redirect("/home");
         });
 

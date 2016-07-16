@@ -11,6 +11,22 @@
 
     <title>${title}</title>
 
+    <style>
+        .loader {
+            border: 16px solid #f3f3f3; /* Light grey */
+            border-top: 16px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
 
@@ -93,10 +109,13 @@
                     <form method="GET" action="/home">
                         <ul class="nav navbar-nav navbar-left">
                             <li>
-                                <a href="/home"> CrossImage </a>
+                                <a href="/home"> Home </a>
                             </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a href="/upload"><span class="glyphicon glyphicon-cloud-upload"></span> Agregar Imagen</a>
+                            </li>
                             <li>
                                 <a href="/zonaAdmin"><span class="glyphicon glyphicon-floppy-save"></span> Administración</a>
                             </li>

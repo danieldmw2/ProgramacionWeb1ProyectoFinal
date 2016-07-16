@@ -2,10 +2,6 @@
 <@layout.master title="Share your images with us!">
 
 <div class="container">
-    <form method="GET" action="/upload">
-        <button class="btn btn-primary">Agregar Imagen</button>
-    </form>
-
     <br />
     <#list images as image>
         <div class="col-lg-4" >
