@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Parcial2.iml" filepath="$PROJECT_DIR$/.idea/modules/Parcial2.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Parcial2_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Parcial2_main.iml" group="Parcial2" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Parcial2_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Parcial2_test.iml" group="Parcial2" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ProgramacionWeb1ProyectoFinal.iml" filepath="$PROJECT_DIR$/.idea/modules/ProgramacionWeb1ProyectoFinal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ProgramacionWeb1ProyectoFinal_main.iml" filepath="$PROJECT_DIR$/.idea/modules/ProgramacionWeb1ProyectoFinal_main.iml" group="ProgramacionWeb1ProyectoFinal" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ProgramacionWeb1ProyectoFinal_test.iml" filepath="$PROJECT_DIR$/.idea/modules/ProgramacionWeb1ProyectoFinal_test.iml" group="ProgramacionWeb1ProyectoFinal" />
     </modules>
   </component>
 </project>

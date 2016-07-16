@@ -11,6 +11,7 @@ import spark.ModelAndView;
 import spark.template.freemarker.FreeMarkerEngine;
 
 import java.util.*;
+import static utilities.JsonUtil.*;
 
 /**
  * Created by Daniel's Laptop on 6/25/2016.
@@ -38,6 +39,10 @@ public class GetURLs
             model.put("image", image);
             return new ModelAndView(model, "postImage.ftl");
         }, freeMarker);
+
+        get("/showImageInfo/*", (request, response) -> {
+         return null;
+        }, json());
 
         get("/home", (request, response) -> {
             HashMap<String, Object> model = new HashMap<>();

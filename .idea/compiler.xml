@@ -21,6 +21,8 @@
     <bytecodeTargetLevel>
       <module name="Parcial2_main" target="1.8" />
       <module name="Parcial2_test" target="1.8" />
+      <module name="ProgramacionWeb1ProyectoFinal_main" target="1.8" />
+      <module name="ProgramacionWeb1ProyectoFinal_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

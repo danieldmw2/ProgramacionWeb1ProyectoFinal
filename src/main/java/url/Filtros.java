@@ -108,6 +108,10 @@ public class Filtros
                 halt(401, "Tiene que tener algun usuario en session para hacer esta accion");
         });
 
+        before((request, response) -> {
+            response.type("application/json");
+        });
+
     }
 
     public static Usuario createAnon()
