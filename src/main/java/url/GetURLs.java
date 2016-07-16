@@ -53,9 +53,9 @@ public class GetURLs
             List<Image> aux = ImageServices.getInstance().select();
             List<Image> images = new ArrayList<>();
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 10; i++)
             {
-                int index = i + ((page - 1) * 5);
+                int index = i + ((page - 1) * 10);
 
                 if (index < aux.size())
                     images.add(aux.get(index));

@@ -34,4 +34,5 @@ dependencies {
     compile 'org.slf4j:slf4j-simple:1.7.21'
     compile 'org.hibernate:hibernate-core:5.2.0.Final'
     compile 'com.dropbox.core:dropbox-core-sdk:2.0.6'
+    compile 'postgresql:postgresql:9.1-901-1.jdbc4'
 }
