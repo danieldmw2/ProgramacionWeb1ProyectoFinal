@@ -1,0 +1,36 @@
+group 'FBB'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'jetty'
+apply plugin: 'application'
+
+archivesBaseName = "app"
+mainClassName = 'Main'
+applicationName = 'app'
+defaultTasks = ['stage']
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.7'
+}
+
+task stage {
+    dependsOn installApp
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile 'com.sparkjava:spark-core:2.5'
+    compile 'com.sparkjava:spark-template-freemarker:2.3'
+    compile 'com.sparkjava:spark-debug-tools:0.5'
+    compile 'com.h2database:h2:1.4.191'
+    compile 'org.slf4j:slf4j-simple:1.7.21'
+    compile 'org.hibernate:hibernate-core:5.2.0.Final'
+}
