@@ -39,6 +39,11 @@ public class GetURLs
             return new ModelAndView(model, "postImage.ftl");
         }, freeMarker);
 
+        get("/", (request, response) -> {
+            response.redirect("/home");
+            return null;
+        });
+
         get("/home", (request, response) -> {
             HashMap<String, Object> model = new HashMap<>();
             int page = request.queryParams("p") != null ? Integer.parseInt(request.queryParams("p")) : 1;

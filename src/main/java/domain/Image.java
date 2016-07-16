@@ -23,7 +23,6 @@ import java.util.List;
 public class Image implements Serializable
 {
     @Id @GeneratedValue private Long id;
-    @Column(nullable = false) private String filename;
     @OneToOne private Usuario usuario;
     @Column(nullable = false, columnDefinition = "VARCHAR(1000)") private String descripcion;
     @Column(nullable = false) private String titulo;
@@ -52,15 +51,9 @@ public class Image implements Serializable
         listaEtiquetas = new ArrayList<>();
     }
 
-    public Image(String filename, String descripcion, String titulo,Usuario usuario) throws IOException
+    public Image(byte[] arr, String descripcion, String titulo,Usuario usuario) throws IOException
     {
-        this.filename = filename.substring(filename.lastIndexOf("\\") + 1);
-        File imgPath = new File(filename);
-        BufferedImage bufferedImage = ImageIO.read(imgPath);
-
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ImageIO.write(bufferedImage, "png", baos);
-        this.image = baos.toByteArray();
+        this.image = arr;
         this.base = Base64.encode(image);
 
         this.usuario = usuario;
@@ -80,16 +73,6 @@ public class Image implements Serializable
     public Long getId()
     {
         return id;
-    }
-
-    public String getFilename()
-    {
-        return filename;
-    }
-
-    public void setFilename(String filename)
-    {
-        this.filename = filename;
     }
 
     public byte[] getImage()
