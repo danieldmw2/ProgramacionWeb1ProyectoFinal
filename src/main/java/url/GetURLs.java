@@ -140,16 +140,25 @@ public class GetURLs
         get("/MisFotos", (request, response) -> {
             HashMap<String, Object> model = new HashMap<>();
             int page = request.queryParams("p") != null ? Integer.parseInt(request.queryParams("p")) : 1;
+            String param = request.queryParams("user");
             model.put("page", (page + 1));
 
             //Change this way to a more efficient way later.
             List<Image> aux = ImageServices.getInstance().select();
             List<Image> images = new ArrayList<>();
 
+            Usuario user = param  != null ? UsuarioServices.getInstance().selectByID(param) : loggedInUser;
+
+            if(user == null)
+            {
+                response.redirect("/home");
+                return null;
+            }
+
             for (int j = 0; j < aux.size(); j++)
             {
                 Image i = aux.get(j);
-                if (!i.getUsuario().getUsername().equals(loggedInUser.getUsername()))
+                if (!i.getUsuario().getUsername().equals(user.getUsername()))
                 {
                     aux.remove(j);
                     j--;

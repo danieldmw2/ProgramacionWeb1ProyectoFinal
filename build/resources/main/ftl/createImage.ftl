@@ -21,7 +21,7 @@
                         Descripción:<span style="color: red">*</span>
                     </div>
                     <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
-                        <textarea name="description" rows="4" cols="50"></textarea>
+                        <textarea name="description" rows="4" cols="50" required></textarea>
                     </div>
                 </div>
 
