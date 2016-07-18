@@ -4,10 +4,8 @@
 <!-- Page Content -->
 <div class="container">
 
-    <div class="row">
-
         <!-- Blog Post Content Column -->
-        <div class="col-lg-8">
+        <div class="col-lg-12">
 
             <!-- Blog Post -->
 
@@ -32,11 +30,24 @@
 
             <hr>
 
-            <a href="/image/${image.id}"><img src="data:image/png;base64,${image.getBase()}"></a>
+            <a href="/plainImage/${image.id}"><img class="center-block" width="600px" height="600px" src="data:image/png;base64,${image.getBase()}"></a>
 
             <!-- Post Content -->
-            <p class="lead">${descripcion}</p>
+            <h2>Descripcion:</h2>
+            <div class="well"><p class="lead">${descripcion}</p></div>
 
+            <div class="well center-block">
+                <h4>Etiquetas:</h4>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <ul class="list-inline list-tags">
+                            <#list etiquetas as etiqueta>
+                                <li><button name="etiqueta" value="${etiqueta.etiqueta}" onclick="document.location='/home/${etiqueta.etiqueta}'" class="btn-danger"><span class="btn-xs">${etiqueta.etiqueta}</span></button></li>
+                            </#list>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
             <button class="btn btn-primary" onclick="javascript:redirectWithData('/likeImage', 'id', '${image.id}')"><span class="glyphicon glyphicon-thumbs-up"></span> ${image.likes}</button>
             <button class="btn btn-primary" onclick="javascript:redirectWithData('/dislikeImage', 'id', '${image.id}')"><span class="glyphicon glyphicon-thumbs-down"></span> ${image.dislikes}</button>
@@ -61,42 +72,24 @@
 
             <#list comentarios as c>
                 <!-- Comment -->
-                <div class="media">
-                    <a class="pull-left" href="#">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading">${c.autor.username}
-                        </h4>
-                    ${c.comentario}
-                        <button class="btn btn-primary" onclick="javascript:commentLike('/likeComment', '${c.id}', '${image.id}')"><span class="glyphicon glyphicon-thumbs-up"></span> ${c.likes}</button>
-                        <button class="btn btn-primary" onclick="javascript:commentLike('/dislikeComment', '${c.id}', '${image.id}')"><span class="glyphicon glyphicon-thumbs-down"></span> ${c.dislikes}</button>
-                        <button class="btn btn-primary" onclick="javascript:commentLike('/deleteComment', '${c.id}', '${image.id}')"><span class="glyphicon glyphicon-remove"></span> Borrar</button>
+                <div class="well">
+                    <div class="media">
+                        <a class="pull-left" href="#">
+                        </a>
+                        <div class="media-body">
+                            <h3 class="media-heading"><a href="/MisFotos?user=${c.autor.username}">${c.autor.username}</a> en ${c.date} dijo: </h3>
+                            <p></p>
+                            <p class="lead">${c.comentario}</p>
+                            <button class="btn btn-primary" onclick="javascript:commentLike('/likeComment', '${c.id}', '${image.id}')"><span class="glyphicon glyphicon-thumbs-up"></span> ${c.likes}</button>
+                            <button class="btn btn-primary" onclick="javascript:commentLike('/dislikeComment', '${c.id}', '${image.id}')"><span class="glyphicon glyphicon-thumbs-down"></span> ${c.dislikes}</button>
+                            <button class="btn btn-primary" onclick="javascript:commentLike('/deleteComment', '${c.id}', '${image.id}')"><span class="glyphicon glyphicon-remove"></span> Borrar</button>
+                        </div>
                     </div>
                 </div>
             </#list>
 
-        </div>
-
         <!-- Blog Sidebar Widgets Column -->
-        <div class="col-md-4">
 
-            <!-- Blog Categories Well -->
-            <div class="well">
-                <h4>Etiquetas:</h4>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <ul class="list-inline list-tags">
-                            <#list etiquetas as etiqueta>
-                                <li><button class="btn-danger"><span class="btn-xs">${etiqueta.etiqueta}</span></button></li>
-                            </#list>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
     <!-- /.row -->
 
     <hr>

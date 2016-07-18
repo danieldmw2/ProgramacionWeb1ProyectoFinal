@@ -11,7 +11,7 @@ import services.UsuarioServices;
 import java.util.ArrayList;
 import java.util.List;
 
-import static utilities.JsonUtil.json;
+import static util.JsonUtil.json;
 
 /**
  * Created by Ariel on 7/16/2016.
