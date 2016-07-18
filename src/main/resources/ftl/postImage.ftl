@@ -15,9 +15,9 @@
             <!-- Author -->
             <p class="lead">
                 <#if image.usuario?has_content>
-                    Publicado por <a>${image.usuario.username}</a>
+                    Publicado por <a href="/MisFotos?user=${image.usuario.username}">${image.usuario.username}</a>
                 <#else>
-                    Publicado por <a>Anon</a>
+                    Publicado por <a href="/MisFotos?user=Anon">Anon</a>
                 </#if>
             </p>
             <p class="lead">

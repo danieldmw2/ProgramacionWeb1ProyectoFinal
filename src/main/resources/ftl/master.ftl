@@ -117,7 +117,7 @@
                                 <a href="/upload"><span class="glyphicon glyphicon-cloud-upload"></span> Agregar Imagen</a>
                             </li>
                             <li>
-                                <a href="/zonaAdmin"><span class="glyphicon glyphicon-floppy-save"></span> Administración</a>
+                                <a href="/zonaAdmin/listUsers"><span class="glyphicon glyphicon-floppy-save"></span> Administración</a>
                             </li>
                             <li>
                                 <a href="/MisFotos"><span class="glyphicon glyphicon-camera"></span> Mis Fotos</a>

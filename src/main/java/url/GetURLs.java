@@ -136,6 +136,11 @@ public class GetURLs
         }, freeMarker);
 
         get("/zonaAdmin", (request, response) -> {
+            response.redirect("/zonaAdmin/listUsers");
+            return null;
+        });
+
+        get("/zonaAdmin/listUsers", (request, response) -> {
             HashMap<String, Object> model = new HashMap<>();
             model.put("users", UsuarioServices.getInstance().select());
             model.put("iniciarSesion", login);
