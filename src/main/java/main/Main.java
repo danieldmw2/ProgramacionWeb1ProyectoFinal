@@ -16,7 +16,7 @@ import services.*;
 import url.Filtros;
 import url.GetURLs;
 import url.PostURLs;
-import webservices.ImageWebServices;
+import webservices.RESTWebServices;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -51,7 +51,7 @@ public class Main
         GetURLs.create(freeMarker);
         PostURLs.create(freeMarker);
         Filtros.aplicarFiltros();
-        ImageWebServices.aplicarServiciosRESTful();
+        RESTWebServices.aplicarServiciosRESTful();
     }
 	
 	static int getHerokuAssignedPort() {

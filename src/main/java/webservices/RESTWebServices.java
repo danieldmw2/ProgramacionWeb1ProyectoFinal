@@ -1,9 +1,4 @@
-
-
 package webservices;
-import static main.Main.getFile;
-import static main.Main.loggedInUser;
-import static spark.Spark.*;
 
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import domain.Etiqueta;
@@ -15,13 +10,16 @@ import services.UsuarioServices;
 import java.util.ArrayList;
 import java.util.List;
 
+import static main.Main.getFile;
+import static main.Main.loggedInUser;
+import static spark.Spark.get;
+import static spark.Spark.post;
 import static util.JsonUtil.json;
-import static util.JsonUtil.toJson;
 
 /**
- * Created by Ariel on 7/16/2016.
+ * Created by Daniel's Laptop on 7/18/2016.
  */
-public class ImageWebServices
+public class RESTWebServices
 {
     public static void aplicarServiciosRESTful()
     {
@@ -38,7 +36,10 @@ public class ImageWebServices
                     if (usuario.getUsername().equals(image.getUsuario().getUsername()))
                         images.add(image);
             }
-            return images;
+
+            ArrayList<Image> lol = new ArrayList<>();
+            lol.add(images.get(0));
+            return lol;
         }, json());
 
         post("/postImage", (request, response) ->
@@ -59,6 +60,14 @@ public class ImageWebServices
             return success;
         }, json());
 
+        get("/listUsers", (request, response) -> {
+            List<Usuario> users = UsuarioServices.getInstance().select();
+            ArrayList<String> usernames = new ArrayList<>();
+            for(Usuario u : users)
+                usernames.add(u.getUsername());
+
+            return usernames;
+        }, json());
+
     }
 }
-
