@@ -26,20 +26,19 @@ public class RESTWebServices
         get("/listImages/*", (request, response) -> {
 
             List<Image> aux = ImageServices.getInstance().select();
-            List<Image> images = new ArrayList<Image>();
             String[] url = request.url().split("/");
             Usuario usuario = UsuarioServices.getInstance().selectByID(url[4]);
-
+            ArrayList<String> actualImages = new ArrayList<>();
             for(Image image: aux)
             {
                 if(image.getUsuario() != null)
                     if (usuario.getUsername().equals(image.getUsuario().getUsername()))
-                        images.add(image);
+                    {
+                        actualImages.add(image.getBase());
+                    }
             }
 
-            ArrayList<Image> lol = new ArrayList<>();
-            lol.add(images.get(0));
-            return lol;
+            return actualImages;
         }, json());
 
         post("/postImage", (request, response) ->
@@ -47,8 +46,9 @@ public class RESTWebServices
             boolean success = false;
             if(!request.queryParams("description").isEmpty() && !request.queryParams("title").isEmpty())
             {
+                System.out.println(request.queryParams("description"));
                 String base64 = getFile("image.txt");
-                Image image = new Image(Base64.decode(base64.substring(base64.indexOf("base64,") + "base64,".length())), request.queryParams("description"), request.queryParams("title"), loggedInUser);
+                Image image = new Image(Base64.decode(base64), request.queryParams("description"), request.queryParams("title"), loggedInUser);
 
                 for (String tag : request.queryParams("tags").split(","))
                     image.getListaEtiquetas().add(new Etiqueta(tag));

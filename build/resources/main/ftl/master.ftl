@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://www.dropbox.com/static/api/dropbox-datastores-1.0-latest.js"></script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,6 +10,22 @@
     <meta name="author" content="">
 
     <title>${title}</title>
+
+    <style>
+        .loader {
+            border: 16px solid #f3f3f3; /* Light grey */
+            border-top: 16px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -24,8 +41,9 @@
 
 <script language="javascript">
 
-    function copyToClipboard(text) {
-        window.prompt("Copia el texto: Ctrl+C, Enter", text);
+    function copyToClipboard(text, text2) {
+        window.prompt("Copia el texto: Ctrl+C, Enter\n\nLink de la imagen en el blog ", text);
+        window.prompt("Copia el texto: Ctrl+C, Enter\n\nLink de la imagen: ", text2);
     }
 
     var redirect = function(url) {
@@ -91,12 +109,18 @@
                     <form method="GET" action="/home">
                         <ul class="nav navbar-nav navbar-left">
                             <li>
-                                <a href="/home"> CrossImage </a>
+                                <a href="/home"> Home </a>
                             </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li>
-                                <a href="/zonaAdmin"><span class="glyphicon glyphicon-floppy-save"></span> Administración</a>
+                                <a href="/upload"><span class="glyphicon glyphicon-cloud-upload"></span> Agregar Imagen</a>
+                            </li>
+                            <li>
+                                <a href="/zonaAdmin/listUsers"><span class="glyphicon glyphicon-floppy-save"></span> Administración</a>
+                            </li>
+                            <li>
+                                <a href="/MisFotos"><span class="glyphicon glyphicon-camera"></span> Mis Fotos</a>
                             </li>
                             <li>
                                 <a href="/sign-up"><span class="glyphicon glyphicon-user"></span> ¡Regístrate!</a>

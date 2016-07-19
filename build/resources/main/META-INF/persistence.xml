@@ -6,7 +6,6 @@
     <persistence-unit name="Validation" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>domain.Usuario</class>
-        <class>domain.Album</class>
         <class>domain.Comentario</class>
         <class>domain.Image</class>
         <class>domain.Etiqueta</class>
@@ -16,7 +15,7 @@
             <property name="javax.persistence.jdbc.user" value="user" />
             <property name="javax.persistence.jdbc.password" value="admin" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
-            <property name="hibernate.hbm2ddl.auto" value="validate" />
+            <property name="hibernate.hbm2ddl.auto" value="create" />
             <property name="hibernate.show_sql" value="true"/>
             <property name="eclipselink.logging.level" value="ALL" />
         </properties>
@@ -25,7 +24,6 @@
     <persistence-unit name="Creation" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>domain.Usuario</class>
-        <class>domain.Album</class>
         <class>domain.Comentario</class>
         <class>domain.Image</class>
         <class>domain.Etiqueta</class>
