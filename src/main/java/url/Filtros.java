@@ -117,7 +117,6 @@ public class Filtros
         before("/listImages/*", (request, response) -> {
             response.type("application/json");
         });
-
     }
 
     public static Usuario createAnon()

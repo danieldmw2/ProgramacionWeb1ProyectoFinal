@@ -40,10 +40,6 @@ public class GetURLs
             return new ModelAndView(model, "postImage.ftl");
         }, freeMarker);
 
-        get("/showImageInfo/*", (request, response) -> {
-         return null;
-        }, json());
-
         get("/", (request, response) -> {
             response.redirect("/home");
             return null;

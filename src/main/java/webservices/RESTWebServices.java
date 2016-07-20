@@ -23,8 +23,7 @@ public class RESTWebServices
 {
     public static void aplicarServiciosRESTful()
     {
-        get("/listImages/*", (request, response) -> {
-
+        get("/REST/listImages/*", (request, response) -> {
             List<Image> aux = ImageServices.getInstance().select();
             String[] url = request.url().split("/");
             Usuario usuario = UsuarioServices.getInstance().selectByID(url[4]);
@@ -41,14 +40,17 @@ public class RESTWebServices
             return actualImages;
         }, json());
 
-        post("/postImage", (request, response) ->
+        post("/REST/postImage", (request, response) ->
         {
+            if(UsuarioServices.getInstance().selectByID("REST Service") == null)
+                UsuarioServices.getInstance().insert(new Usuario("REST Service", "REST@Service.com", "admin", true));
+
             boolean success = false;
             if(!request.queryParams("description").isEmpty() && !request.queryParams("title").isEmpty())
             {
                 System.out.println(request.queryParams("description"));
                 String base64 = getFile("image.txt");
-                Image image = new Image(Base64.decode(base64), request.queryParams("description"), request.queryParams("title"), loggedInUser);
+                Image image = new Image(Base64.decode(base64), request.queryParams("description"), request.queryParams("title"), UsuarioServices.getInstance().selectByID("REST Service"));
 
                 for (String tag : request.queryParams("tags").split(","))
                     image.getListaEtiquetas().add(new Etiqueta(tag));
@@ -60,7 +62,7 @@ public class RESTWebServices
             return success;
         }, json());
 
-        get("/listUsers", (request, response) -> {
+        get("/REST/listUsers", (request, response) -> {
             List<Usuario> users = UsuarioServices.getInstance().select();
             ArrayList<String> usernames = new ArrayList<>();
             for(Usuario u : users)
