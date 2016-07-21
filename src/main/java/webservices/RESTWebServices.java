@@ -48,7 +48,7 @@ public class RESTWebServices
             boolean success = false;
             if (!request.queryParams("description").isEmpty() && !request.queryParams("title").isEmpty())
             {
-                String base64 = getFile("image.txt");
+                String base64 = getFile("image-REST Service.txt");
                 Image image = new Image(Base64.decode(base64), request.queryParams("description"), request.queryParams("title"), UsuarioServices.getInstance().selectByID("REST Service"));
                 ImageServices.getInstance().insert(image);
                 for (String tag : request.queryParams("tags").split(","))

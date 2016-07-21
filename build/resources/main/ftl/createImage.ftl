@@ -73,7 +73,7 @@
                         return function (e) {
                             document.getElementById('loading').style.visibility = "visible";
                             client.authenticate(function () {
-                                client.writeFile('image.txt', e.target.result, function () {
+                                client.writeFile('image-${user}.txt', e.target.result, function () {
                                     document.getElementById('button').disabled = false;
                                     document.getElementById('loading').style.visibility = "hidden";
                                     return null;

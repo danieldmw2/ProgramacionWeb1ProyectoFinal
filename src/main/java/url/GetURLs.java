@@ -87,6 +87,7 @@ public class GetURLs
         get("/upload", (request, response) -> {
             HashMap<String, Object> model = new HashMap<>();
             model.put("iniciarSesion", login);
+            model.put("user", loggedInUser.getUsername());
             return new ModelAndView(model, "createImage.ftl");
         }, freeMarker);
 

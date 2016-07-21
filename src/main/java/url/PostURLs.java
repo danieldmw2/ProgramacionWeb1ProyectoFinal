@@ -58,7 +58,7 @@ public class PostURLs
         post("/insertImage", (request, response) -> {
             if(!request.queryParams("description").isEmpty() && !request.queryParams("title").isEmpty())
             {
-                String base64 = getFile("image.txt");
+                String base64 = getFile(String.format("image-%s.txt", loggedInUser.getUsername()));
                 Image image = new Image(Base64.decode(base64.substring(base64.indexOf("base64,") + "base64,".length())), request.queryParams("description"), request.queryParams("title"), loggedInUser);
                 ImageServices.getInstance().insert(image);
                 for (String tag : request.queryParams("tags").split(","))
@@ -74,8 +74,6 @@ public class PostURLs
         post("/editImage", (request, response) -> {
             if(!request.queryParams("description").isEmpty() && !request.queryParams("title").isEmpty())
             {
-
-
                 Image image = ImageServices.getInstance().selectByID(Long.parseLong(request.queryParams("id")));
                 image.setDescripcion(request.queryParams("description"));
                 image.setTitulo(request.queryParams("title"));
