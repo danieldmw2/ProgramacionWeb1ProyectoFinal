@@ -16,15 +16,12 @@ public class Filtros
     public static void aplicarFiltros()
     {
         before("/*", (request, response) -> {
-            if (Main.loggedInUser == null)
+            if (request.cookie("user") != null && !request.cookie("user").equals(""))
             {
-                if (request.cookie("user") != null && !request.cookie("user").equals(""))
-                {
-                    Usuario user = UsuarioServices.getInstance().selectByID(request.cookie("user"));
-                    request.session(true).attribute("usuario", user);
-                    Main.loggedInUser = user;
-                    Main.login = "Cerrar Sesión";
-                }
+                Usuario user = UsuarioServices.getInstance().selectByID(request.cookie("user"));
+                request.session(true).attribute("usuario", user);
+                Main.loggedInUser = user;
+                Main.login = "Cerrar Sesión";
             }
         });
 
@@ -50,7 +47,10 @@ public class Filtros
             Usuario usuario = request.session(true).attribute("usuario");
 
             if (usuario == null)
+            {
                 request.session(true).attribute("usuario", createAnon());
+                response.cookie("user", "Anon");
+            }
         });
 
         before("/edit", (request, response) -> {
@@ -114,7 +114,7 @@ public class Filtros
                 halt(401, "Tiene que tener algun usuario en session para hacer esta accion");
         });
 
-        before("/listImages/*", (request, response) -> {
+        before("/REST/*", (request, response) -> {
             response.type("application/json");
         });
     }
