@@ -128,11 +128,9 @@ public class GetURLs {
 
         get("/MisFotos", (request, response) -> {
             HashMap<String, Object> model = new HashMap<>();
+            EntityManager entityManager = db.getEntityManager();
             int page = request.queryParams("p") != null ? Integer.parseInt(request.queryParams("p")) : 1;
             String param = request.queryParams("user");
-
-            //Change this way to a more efficient way later.
-            List<Image> aux = ImageServices.getInstance().select();
             List<Image> images = new ArrayList<>();
 
             Usuario user = param != null ? UsuarioServices.getInstance().selectByID(param) : loggedInUser;
@@ -142,22 +140,13 @@ public class GetURLs {
                 return null;
             }
 
-            for (int j = 0; j < aux.size(); j++) {
-                Image i = aux.get(j);
-                if (!i.getUsuario().getUsername().equals(user.getUsername())) {
-                    aux.remove(j);
-                    j--;
-                }
-            }
+            String query = "select i from Image i WHERE i.usuario.username='" + user.getUsername() + "' order by i.date desc";
+            Query q = entityManager.createQuery(query, Image.class);
+            q.setFirstResult((page-1) * 12);
+            q.setMaxResults(12);
+            images = q.getResultList();
 
-            for (int i = 0; i < 12; i++) {
-                int index = i + ((page - 1) * 12);
 
-                if (index < aux.size())
-                    images.add(aux.get(index));
-                else
-                    break;
-            }
             model.put("redirect", "MisFotos?p=" + (page + 1) + "&user=" + user.getUsername());
             model.put("images", images);
             model.put("iniciarSesion", login);
