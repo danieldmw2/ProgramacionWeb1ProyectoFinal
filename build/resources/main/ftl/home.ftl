@@ -24,7 +24,7 @@
         <!-- Pager -->
         <ul class="pager">
             <li class="next">
-                <a href="/home?p=${page}">Publicaciones más antiguas →</a>
+                <a href="/${redirect}">Publicaciones más antiguas →</a>
             </li>
         </ul>
 </div>

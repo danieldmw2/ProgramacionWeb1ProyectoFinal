@@ -1,15 +1,11 @@
 package url;
 
-import com.dropbox.core.v1.DbxEntry;
 import domain.*;
 import services.ComentarioServices;
 import services.ImageServices;
 import services.UsuarioServices;
 import spark.template.freemarker.FreeMarkerEngine;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import java.util.regex.Pattern;
@@ -64,11 +60,11 @@ public class PostURLs
             {
                 String base64 = getFile("image.txt");
                 Image image = new Image(Base64.decode(base64.substring(base64.indexOf("base64,") + "base64,".length())), request.queryParams("description"), request.queryParams("title"), loggedInUser);
-
-                for (String tag : request.queryParams("tags").split(","))
-                    image.getListaEtiquetas().add(new Etiqueta(tag));
-
                 ImageServices.getInstance().insert(image);
+                for (String tag : request.queryParams("tags").split(","))
+                    image.getListaEtiquetas().add(new Etiqueta(tag, image.getId()));
+
+                ImageServices.getInstance().update(image);
                 response.redirect("/home");
                 return null;
             }
@@ -84,9 +80,9 @@ public class PostURLs
                 image.setDescripcion(request.queryParams("description"));
                 image.setTitulo(request.queryParams("title"));
                 image.setListaEtiquetas(new ArrayList<>());
-
+                ImageServices.getInstance().update(image);
                 for (String tag : request.queryParams("tags").split(","))
-                    image.getListaEtiquetas().add(new Etiqueta(tag));
+                    image.getListaEtiquetas().add(new Etiqueta(tag,image.getId()));
 
                 ImageServices.getInstance().update(image);
 

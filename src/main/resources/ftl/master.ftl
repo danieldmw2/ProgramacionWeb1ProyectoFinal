@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
     <script src="https://www.dropbox.com/static/api/dropbox-datastores-1.0-latest.js"></script>
+    <script type="text/javascript" src="/js/sound-mouseover.js"></script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,6 +30,7 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
+
 
     <!-- Custom Fonts -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -109,27 +111,27 @@
                     <form method="GET" action="/home">
                         <ul class="nav navbar-nav navbar-left">
                             <li>
-                                <a href="/home"> Home </a>
+                                <a href="/home" onmouseover="playclip();"> Home </a>
                             </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li>
-                                <a href="/upload"><span class="glyphicon glyphicon-cloud-upload"></span> Agregar Imagen</a>
+                                <a href="/upload" onmouseover="playclip();"><span class="glyphicon glyphicon-cloud-upload"></span> Agregar Imagen</a>
                             </li>
                             <li>
-                                <a href="/zonaAdmin/listUsers"><span class="glyphicon glyphicon-floppy-save"></span> Administración</a>
+                                <a href="/zonaAdmin/listUsers" onmouseover="playclip();"><span class="glyphicon glyphicon-floppy-save"></span> Administración</a>
                             </li>
                             <li>
-                                <a href="/MisFotos"><span class="glyphicon glyphicon-camera"></span> Mis Fotos</a>
+                                <a href="/MisFotos" onmouseover="playclip();"><span class="glyphicon glyphicon-camera"></span> Mis Fotos</a>
                             </li>
                             <li>
-                                <a href="/sign-up"><span class="glyphicon glyphicon-user"></span> ¡Regístrate!</a>
+                                <a href="/sign-up" onmouseover="playclip();"><span class="glyphicon glyphicon-user"></span> ¡Regístrate!</a>
                             </li>
                             <li>
                                 <#if iniciarSesion == "Cerrar Sesión">
-                                    <a href="javascript:redirect('/logout')" ><span class="glyphicon glyphicon-log-out"></span> ${iniciarSesion}</a>
+                                    <a href="javascript:redirect('/logout')" onmouseover="playclip();" ><span class="glyphicon glyphicon-log-out"></span> ${iniciarSesion}</a>
                                 <#else>
-                                    <a href="/sign-in"><span class="glyphicon glyphicon-log-in"></span> ${iniciarSesion}
+                                    <a href="/sign-in" onmouseover="playclip();"><span class="glyphicon glyphicon-log-in"></span> ${iniciarSesion}
                                     </a>
                                 </#if>
                             </li>
@@ -159,8 +161,14 @@
 
     <#nested />
 
+<audio>
+    <source src="/audio/Anime SFX Naruto- Bunshin Seal.mp3">
+    <source src="/audio/Anime SFX Naruto- Bunshin Seal.ogg">
+</audio>
+<div id="sounddiv"><bgsound id="sound"></div>
 <!-- Bootstrap Core JavaScript -->
 <script src="/js/bootstrap.min.js"></script>
+
 
 </body>
 </html>

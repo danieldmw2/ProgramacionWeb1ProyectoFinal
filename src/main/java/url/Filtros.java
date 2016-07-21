@@ -59,7 +59,7 @@ public class Filtros
             if (usuario != null)
             {
                 Image image = ImageServices.getInstance().selectByID(Long.parseLong(request.queryParams("id")));
-                if(!usuario.isAdministrator() && !image.getUsuario().getUsername().equals(usuario.getUsername()))
+                if (!usuario.isAdministrator() && !image.getUsuario().getUsername().equals(usuario.getUsername()))
                     halt(401, "Tiene que ser administrador del sistema o autor del post para hacer esta accion");
             }
             else
@@ -78,7 +78,7 @@ public class Filtros
         before("/zonaAdmin/deleteUser", (request, response) -> {
             String user = request.queryParams("username");
 
-            if(user.equalsIgnoreCase("user"))
+            if (user.equalsIgnoreCase("user"))
                 halt(401, "El usuario predeterminado no puede ser borrado");
         });
 
@@ -88,7 +88,7 @@ public class Filtros
             if (usuario != null)
             {
                 Image image = ImageServices.getInstance().selectByID(Long.parseLong(request.queryParams("id")));
-                if(!usuario.isAdministrator() && !image.getUsuario().getUsername().equals(usuario.getUsername()))
+                if (!usuario.isAdministrator() && !image.getUsuario().getUsername().equals(usuario.getUsername()))
                     halt(401, "Tiene que ser administrador del sistema o autor del album para hacer esta accion");
             }
             else
@@ -107,7 +107,7 @@ public class Filtros
             Usuario usuario = request.session(true).attribute("usuario");
             if (usuario != null)
             {
-                if(!usuario.isAdministrator())
+                if (!usuario.isAdministrator())
                     halt(401, "Tiene que ser administrador del sistema o autor del album para hacer esta accion");
             }
             else
@@ -123,12 +123,12 @@ public class Filtros
     {
         Usuario user = new Usuario("Anon", "Anon@Anon.com", "", false);
 
-        if(UsuarioServices.getInstance().selectByID(user.getUsername()) == null)
+        if (UsuarioServices.getInstance().selectByID(user.getUsername()) == null)
             UsuarioServices.getInstance().insert(user);
 
         Main.loggedInUser = user;
         Main.login = "Cerrar Sesión";
 
-        return  user;
+        return user;
     }
 }

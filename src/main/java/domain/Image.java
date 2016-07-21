@@ -8,11 +8,7 @@ import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import services.ComentarioServices;
 import services.ImageServices;
 
-import javax.imageio.ImageIO;
 import javax.persistence.*;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -4,12 +4,8 @@ import static spark.Spark.*;
 import static spark.debug.DebugScreen.enableDebugScreen;
 
 import com.dropbox.core.*;
-import com.dropbox.core.v1.DbxEntry;
 import com.dropbox.core.v1.DbxClientV1;
 import domain.*;
-import jdk.nashorn.internal.ir.debug.JSONWriter;
-import jdk.nashorn.internal.parser.JSONParser;
-import spark.ModelAndView;
 import spark.template.freemarker.FreeMarkerEngine;
 import freemarker.template.Configuration;
 import services.*;
@@ -17,11 +13,7 @@ import url.Filtros;
 import url.GetURLs;
 import url.PostURLs;
 import webservices.RESTWebServices;
-
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.*;
-import java.util.*;
 
 /**
  * Created by Daniel's Laptop on 6/20/2016.
@@ -30,14 +22,15 @@ public class Main
 {
     public static Usuario loggedInUser;
     public static String login = "Iniciar Sesión";
+    public static DatabaseServices db;
 
 
     public static void main(String[] args)
     {
-
         port(getHerokuAssignedPort());
         staticFiles.location("/public");
         enableDebugScreen();
+        db = new DatabaseServices(DatabaseServices.class);
 
         if (UsuarioServices.getInstance().selectByID("user") == null)
             UsuarioServices.getInstance().insert(new Usuario("user", "user@admin.com", "admin", true));
@@ -53,10 +46,12 @@ public class Main
         Filtros.aplicarFiltros();
         RESTWebServices.aplicarServiciosRESTful();
     }
-	
-	static int getHerokuAssignedPort() {
+
+    static int getHerokuAssignedPort()
+    {
         ProcessBuilder processBuilder = new ProcessBuilder();
-        if (processBuilder.environment().get("PORT") != null) {
+        if (processBuilder.environment().get("PORT") != null)
+        {
             return Integer.parseInt(processBuilder.environment().get("PORT"));
         }
         return 4567;
