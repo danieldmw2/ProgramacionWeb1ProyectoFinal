@@ -34,6 +34,7 @@ public class GetURLs
             model.put("comentarios", image.getListaComentarios());
             model.put("etiquetas", new HashSet<>(image.getListaEtiquetas()));
             model.put("iniciarSesion", login);
+            model.put("user", loggedInUser == null ? null : loggedInUser.getUsername());
 
             image.addView();
             ImageServices.getInstance().update(image);
@@ -64,6 +65,7 @@ public class GetURLs
             model.put("redirect", "home?p=" + (page + 1));
             model.put("images", images);
             model.put("iniciarSesion", login);
+            model.put("user", loggedInUser == null ? null : loggedInUser.getUsername());
             return new ModelAndView(model, "home.ftl");
         }, freeMarker);
 
@@ -81,13 +83,14 @@ public class GetURLs
             model.put("redirect", "home/" + etiqueta + "?p=" + (page + 1));
             model.put("images", images);
             model.put("iniciarSesion", login);
+            model.put("user", loggedInUser == null ? null : loggedInUser.getUsername());
             return new ModelAndView(model, "home.ftl");
         }, freeMarker);
 
         get("/upload", (request, response) -> {
             HashMap<String, Object> model = new HashMap<>();
             model.put("iniciarSesion", login);
-            model.put("user", loggedInUser.getUsername());
+            model.put("user", loggedInUser == null ? null : loggedInUser.getUsername());
             return new ModelAndView(model, "createImage.ftl");
         }, freeMarker);
 
@@ -102,12 +105,14 @@ public class GetURLs
             model.put("image", image);
             model.put("etiquetas", tags.substring(0, tags.length() - 1));
             model.put("iniciarSesion", login);
+            model.put("user", loggedInUser == null ? null : loggedInUser.getUsername());
             return new ModelAndView(model, "editImage.ftl"); // TODO
         }, freeMarker);
 
         get("/sign-up", (request, response) -> {
             HashMap<String, Object> model = new HashMap<>();
             model.put("iniciarSesion", login);
+            model.put("user", loggedInUser == null ? null : loggedInUser.getUsername());
             return new ModelAndView(model, "registration.ftl");
         }, freeMarker);
 
@@ -118,6 +123,7 @@ public class GetURLs
             request.session().attribute("usuario", loggedInUser);
             login = "Iniciar Sesión";
             model.put("iniciarSesion", login);
+            model.put("user", loggedInUser == null ? null : loggedInUser.getUsername());
             return new ModelAndView(model, "login.ftl");
         }, freeMarker);
 
@@ -130,6 +136,7 @@ public class GetURLs
             HashMap<String, Object> model = new HashMap<>();
             model.put("users", UsuarioServices.getInstance().select());
             model.put("iniciarSesion", login);
+            model.put("user", loggedInUser == null ? null : loggedInUser.getUsername());
             return new ModelAndView(model, "listUsers.ftl");
         }, freeMarker);
 
@@ -158,6 +165,7 @@ public class GetURLs
             model.put("redirect", "MisFotos?p=" + (page + 1) + "&user=" + user.getUsername());
             model.put("images", images);
             model.put("iniciarSesion", login);
+            model.put("user", loggedInUser == null ? null : loggedInUser.getUsername());
             return new ModelAndView(model, "home.ftl");
         }, freeMarker);
 

@@ -113,6 +113,13 @@
                             <li>
                                 <a href="/home" onmouseover="playclip();"> Home </a>
                             </li>
+                            <li>
+                                <#if user?has_content>
+                                    <a>Hola ${user}!</a>
+                                <#else>
+                                    <a>Hola Anon!</a>
+                                </#if>
+                            </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li>
