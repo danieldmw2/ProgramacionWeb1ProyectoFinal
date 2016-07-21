@@ -57,11 +57,11 @@ public class GetURLs {
             List<Image> images = new ArrayList<>();
             String query = "select i from Image i order by i.date desc";
             Query q = entityManager.createQuery(query, Image.class);
-            q.setFirstResult((page-1) * 12);
+            q.setFirstResult((page - 1) * 12);
             q.setMaxResults(12);
             images = q.getResultList();
 
-            model.put("redirect","home?p="+ (page+1));
+            model.put("redirect", "home?p=" + (page + 1));
             model.put("images", images);
             model.put("iniciarSesion", login);
             return new ModelAndView(model, "home.ftl");
@@ -71,21 +71,14 @@ public class GetURLs {
             HashMap<String, Object> model = new HashMap<>();
             EntityManager entityManager = db.getEntityManager();
             int page = request.queryParams("p") != null ? Integer.parseInt(request.queryParams("p")) : 1;
-            List<Image> aux = ImageServices.getInstance().select();
             List<Image> images = new ArrayList<>();
             String etiqueta = request.params("etiqueta");
-            for(Image a: aux)
-            {
-                for(Etiqueta e: new HashSet<>(a.getListaEtiquetas()))
-                {
-                    if(e.getEtiqueta().toLowerCase().equals(request.params("etiqueta").toLowerCase()))
-                    {
-                        images.add(a);
-                        break;
-                    }
-                }
-            };
-            model.put("redirect", "home/" + etiqueta+ "?p="+ (page+1));
+            String query = "select i from Image i, Etiqueta e WHERE i.id= e.imageID AND e.etiqueta='" + etiqueta + "' order by i.date desc";
+            Query q = entityManager.createQuery(query, Image.class);
+            q.setFirstResult((page-1) * 12);
+            q.setMaxResults(12);
+            images = q.getResultList();
+            model.put("redirect", "home/" + etiqueta + "?p=" + (page + 1));
             model.put("images", images);
             model.put("iniciarSesion", login);
             return new ModelAndView(model, "home.ftl");
@@ -149,18 +142,15 @@ public class GetURLs {
                 return null;
             }
 
-           for (int j = 0; j < aux.size(); j++)
-            {
+            for (int j = 0; j < aux.size(); j++) {
                 Image i = aux.get(j);
-                if (!i.getUsuario().getUsername().equals(user.getUsername()))
-                {
+                if (!i.getUsuario().getUsername().equals(user.getUsername())) {
                     aux.remove(j);
                     j--;
                 }
             }
 
-            for (int i = 0; i < 12; i++)
-            {
+            for (int i = 0; i < 12; i++) {
                 int index = i + ((page - 1) * 12);
 
                 if (index < aux.size())
