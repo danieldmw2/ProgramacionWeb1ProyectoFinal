@@ -7,9 +7,9 @@
         <div class="col-lg-4" >
             <div class="well">
                 <#if image.usuario?has_content>
-                    <strong>${image.titulo}</strong> publicado por <strong>${image.usuario.username}</strong>
+                    <strong>${image.titulo}</strong> publicado por <strong><a href="/MisFotos?user=${image.usuario.username}">${image.usuario.username}</a></strong>
                 <#else>
-                    <strong>${image.titulo}</strong> publicado por <strong>Anon</strong>
+                    <strong>${image.titulo}</strong> publicado por <strong><a href="/MisFotos?user=Anon">Anon</a></strong>
                 </#if>
                 <a href="/image/${image.id}"><img class="thumbnail" width="300px" height="300px" src="data:image/png;base64,${image.base}"></a>
 

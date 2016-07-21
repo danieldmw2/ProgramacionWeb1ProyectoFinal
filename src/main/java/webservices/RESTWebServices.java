@@ -26,7 +26,7 @@ public class RESTWebServices
         get("/REST/listImages/*", (request, response) -> {
             List<Image> aux = ImageServices.getInstance().select();
             String[] url = request.url().split("/");
-            Usuario usuario = UsuarioServices.getInstance().selectByID(url[4]);
+            Usuario usuario = UsuarioServices.getInstance().selectByID(url[5]);
             ArrayList<String> actualImages = new ArrayList<>();
             for(Image image: aux)
             {
