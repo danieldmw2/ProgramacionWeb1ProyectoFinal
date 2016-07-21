@@ -54,7 +54,6 @@ public class GetURLs
             int page = request.queryParams("p") != null ? Integer.parseInt(request.queryParams("p")) : 1;
 
             //Change this way to a more efficient way later.
-            List<Image> aux = ImageServices.getInstance().select();
             List<Image> images = new ArrayList<>();
             String query = "select i from Image i order by i.date desc";
             Query q = entityManager.createQuery(query, Image.class);

@@ -2,12 +2,15 @@ package url;
 
 import domain.*;
 import services.ComentarioServices;
+import services.EtiquetaServices;
 import services.ImageServices;
 import services.UsuarioServices;
 import spark.template.freemarker.FreeMarkerEngine;
 
 import java.util.ArrayList;
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
+
+import java.util.List;
 import java.util.regex.Pattern;
 
 import static main.Main.*;
@@ -77,10 +80,18 @@ public class PostURLs
                 Image image = ImageServices.getInstance().selectByID(Long.parseLong(request.queryParams("id")));
                 image.setDescripcion(request.queryParams("description"));
                 image.setTitulo(request.queryParams("title"));
+
+                List<Etiqueta> toDelete = image.getListaEtiquetas();
                 image.setListaEtiquetas(new ArrayList<>());
                 ImageServices.getInstance().update(image);
+
+                for(Etiqueta e : toDelete)
+                    EtiquetaServices.getInstance().delete(e);
+
                 for (String tag : request.queryParams("tags").split(","))
                     image.getListaEtiquetas().add(new Etiqueta(tag,image.getId()));
+
+
 
                 ImageServices.getInstance().update(image);
 
