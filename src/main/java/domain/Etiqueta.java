@@ -12,15 +12,16 @@ public class Etiqueta implements Serializable
 {
     @Id @GeneratedValue private Long id;
     private String etiqueta;
-
+    @Column(nullable = false) private Long imageID;
     public Etiqueta()
     {
 
     }
 
-    public Etiqueta(String etiqueta)
+    public Etiqueta(String etiqueta, Long imageID)
     {
         this.etiqueta = etiqueta;
+        this.imageID = imageID;
     }
 
     public long getId()
@@ -41,6 +42,14 @@ public class Etiqueta implements Serializable
     public void setEtiqueta(String etiqueta)
     {
         this.etiqueta = etiqueta;
+    }
+
+    public Long getImageID() {
+        return imageID;
+    }
+
+    public void setImageID(Long imageID) {
+        this.imageID = imageID;
     }
 }
 

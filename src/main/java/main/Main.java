@@ -29,14 +29,15 @@ public class Main
 {
     public static Usuario loggedInUser;
     public static String login = "Iniciar Sesión";
+    public static DatabaseServices db;
 
 
     public static void main(String[] args)
     {
-
         port(getHerokuAssignedPort());
         staticFiles.location("/public");
         enableDebugScreen();
+        db = new DatabaseServices(DatabaseServices.class);
 
         if (UsuarioServices.getInstance().selectByID("user") == null)
             UsuarioServices.getInstance().insert(new Usuario("user", "user@admin.com", "admin", true));
@@ -50,7 +51,7 @@ public class Main
         PostURLs.create(freeMarker);
         Filtros.aplicarFiltros();
     }
-	
+
 	static int getHerokuAssignedPort() {
         ProcessBuilder processBuilder = new ProcessBuilder();
         if (processBuilder.environment().get("PORT") != null) {
